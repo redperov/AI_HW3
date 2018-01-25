@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 /**
- * Created by Danny on 23/01/2018.
+ * The class implements the DistanceFunction interface.
+ * Calculates the distance between two clusters according to the Single Link method.
  */
 public class SingleLink implements DistanceFunction {
 
@@ -15,6 +16,7 @@ public class SingleLink implements DistanceFunction {
         double shortestDistance = Double.MAX_VALUE;
         double currentDistance;
 
+        //Go over all the points and find the couple with the shortest distance.
         for (int i = 0; i < points1.size(); i++) {
 
             point1 = points1.get(i);

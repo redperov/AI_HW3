@@ -1,14 +1,19 @@
 /**
- * Created by Danny on 22/01/2018.
+ * The class represents a point object.
+ * Consists of x and y coordinates.
  */
 public class Point {
 
     private double x;
     private double y;
-    private Cluster owningCluster;
     private static int idCounter = 0;
     private int id = 0;
 
+    /**
+     * Constructor.
+     * @param x x coordinate
+     * @param y y coordinate
+     */
     public Point(double x, double y){
 
         idCounter++;
@@ -17,23 +22,26 @@ public class Point {
         this.y = y;
     }
 
-    public int getId() {
-        return id;
-    }
-
+    /**
+     * X coordinate getter
+     * @return coordinate
+     */
     public double getX() {
         return x;
     }
 
+    /**
+     * Y coordinate getter.
+     * @return coordinate
+     */
     public double getY() {
         return y;
     }
 
-    public void setOwningCluster(Cluster owningCluster) {
-        this.owningCluster = owningCluster;
-    }
-
     @Override
+    /**
+     * Checks if two points are equal.
+     */
     public boolean equals(Object obj) {
 
         Point otherPoint = (Point) obj;

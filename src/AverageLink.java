@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 /**
- * Created by Danny on 23/01/2018.
+ * The class implements the DistanceFunction interface.
+ * Calculates the distance between two clusters according to the Average Link method.
  */
 public class AverageLink implements DistanceFunction {
 
@@ -17,6 +18,7 @@ public class AverageLink implements DistanceFunction {
         double           currentDistance;
         //int              counter     = 0;
 
+        //Go over all the points and calculate the average distance between them.
         for (int i = 0; i < points1.size(); i++) {
 
             point1 = points1.get(i);
@@ -34,6 +36,7 @@ public class AverageLink implements DistanceFunction {
             }
         }
 
+        //Calculate the average.
         averageDistance = sumDistance / (points1.size() + points2.size());
 
         return averageDistance;

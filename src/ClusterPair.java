@@ -1,5 +1,6 @@
 /**
- * Created by Danny on 23/01/2018.
+ * The class represents a cluster pair.
+ * Consists of two clusters and the distance value between them.
  */
 public class ClusterPair {
 
@@ -7,6 +8,9 @@ public class ClusterPair {
     private Cluster second;
     private double distance;
 
+    /**
+     * Constructor.
+     */
     public ClusterPair() {
 
         this.first = null;
@@ -14,18 +18,35 @@ public class ClusterPair {
         this.distance = Double.MAX_VALUE;
     }
 
+    /**
+     * First cluster getter.
+     * @return cluster
+     */
     public Cluster getFirst() {
         return first;
     }
 
+    /**
+     * Second cluster getter.
+     * @return cluster
+     */
     public Cluster getSecond() {
         return second;
     }
 
+    /**
+     * Distance getter.
+     * @return distance between the two cluster
+     */
     public double getDistance() {
         return distance;
     }
 
+    /**
+     * Pair setter.
+     * @param first first cluster
+     * @param second second cluster
+     */
     public void setPair(Cluster first, Cluster second){
 
         if(first.getClusterId() <= second.getClusterId()){
@@ -40,6 +61,10 @@ public class ClusterPair {
         }
     }
 
+    /**
+     * Distance setter.
+     * @param distance distance between the two clusters
+     */
     public void setDistance(double distance) {
         this.distance = distance;
     }

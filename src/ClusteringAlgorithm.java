@@ -101,6 +101,7 @@ public class ClusteringAlgorithm {
 
         for (int i = 0; i < clusters.size(); i++) {
 
+            //Check if the current cluster is the cluster which needs to be deleted.
             if (clusters.get(i).getClusterId() == clusterToRemoveId) {
 
                 clusters.remove(i);
@@ -125,6 +126,7 @@ public class ClusteringAlgorithm {
 
         for (Cluster cluster : clusters) {
 
+            //Check if the current cluster is the one which is supposed to hold the combined points list.
             if (cluster.getClusterId() == id) {
 
                 cluster.setPoints(firstList);
@@ -143,6 +145,7 @@ public class ClusteringAlgorithm {
         ArrayList<Integer> result = new ArrayList<>(points.size());
         int                clusterId;
 
+        //For each point' find the corresponding cluster id, and add it to the list.
         for (Point point : points) {
 
             clusterId = pointToClusterId(point, clusters);
@@ -169,6 +172,7 @@ public class ClusteringAlgorithm {
 
             for (Point pointToCompare : points) {
 
+                //Check if the current point equals to the one which is searched for.
                 if (point.equals(pointToCompare)) {
 
                     return cluster.getClusterId();
@@ -179,6 +183,10 @@ public class ClusteringAlgorithm {
         return -1;
     }
 
+    /**
+     * Reorders the clusters ids.
+     * @param clusters clusters list
+     */
     private static void reorderIds(ArrayList<Cluster> clusters){
 
         for(int i = 0; i < clusters.size(); i++){

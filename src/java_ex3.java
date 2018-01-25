@@ -8,6 +8,10 @@ import java.util.ArrayList;
  */
 public class java_ex3 {
 
+    /**
+     * The main method of the program.
+     * @param args arguments
+     */
     public static void main(String args[]) {
 
         //Input file path.
