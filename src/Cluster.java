@@ -28,6 +28,10 @@ public class Cluster{
         return clusterId;
     }
 
+    public void setClusterId(int clusterId) {
+        this.clusterId = clusterId;
+    }
+
     public void setPoints(ArrayList<Point> points) {
         this.points = points;
     }

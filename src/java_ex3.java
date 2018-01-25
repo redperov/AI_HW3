@@ -1,10 +1,10 @@
-import jdk.nashorn.internal.runtime.ListAdapter;
-
 import java.io.*;
 import java.util.ArrayList;
 
 /**
- * Created by Danny on 22/01/2018.
+ * The main class of the program.
+ * It reads the data from the file and applies the requested clustering algorithm on the given points.
+ * Afterwards, writes the solution into the output file.
  */
 public class java_ex3 {
 
@@ -19,7 +19,7 @@ public class java_ex3 {
         //Read the data from the input a searchable object.
         Searchable searchable = readInput(inputFilePath);
 
-        //Get the winning player in the game.
+        //Divide the points into clusters.
         ArrayList<Integer> solution = ClusteringAlgorithm.execute(searchable);
 
         //Write the solution to the output file.
@@ -27,21 +27,27 @@ public class java_ex3 {
     }
 
 
+    /**
+     * Reads the input from the given file.
+     *
+     * @param filePath input file path
+     * @return Searchable object
+     */
     public static Searchable readInput(String filePath) {
 
-        Searchable searchable = null;
-        ArrayList<Point> points = new ArrayList<>();
+        Searchable       searchable = null;
+        ArrayList<Point> points     = new ArrayList<>();
 
         //Read data from input file.
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath));
-            String[] rawPoints;
+            String[]       rawPoints;
             String         rowRead;
-            String algorithmType;
-            Point newPoint;
-            int neededClusters;
-            int x;
-            int y;
+            String         algorithmType;
+            Point          newPoint;
+            int            neededClusters;
+            double         x;
+            double         y;
 
             //Read algorithm type.
             algorithmType = bufferedReader.readLine();
@@ -50,19 +56,19 @@ public class java_ex3 {
             neededClusters = Integer.parseInt(rowRead = bufferedReader.readLine());
 
             //Read points into a list.
-           while((rowRead = bufferedReader.readLine()) != null){
+            while ((rowRead = bufferedReader.readLine()) != null) {
 
-               rawPoints = rowRead.split(",");
-               x = Integer.parseInt(rawPoints[0]);
-               y = Integer.parseInt(rawPoints[1]);
+                rawPoints = rowRead.split(",");
+                x = Double.parseDouble(rawPoints[0]);
+                y = Double.parseDouble(rawPoints[1]);
 
-               newPoint = new Point(x, y);
-               points.add(newPoint);
-           }
+                newPoint = new Point(x, y);
+                points.add(newPoint);
+            }
 
             bufferedReader.close();
 
-           searchable = new Searchable(algorithmType, neededClusters, points);
+            searchable = new Searchable(algorithmType, neededClusters, points);
 
         } catch (FileNotFoundException e) {
             System.out.println("Error: File not found.");
@@ -90,11 +96,10 @@ public class java_ex3 {
             //Write all the values to the file.
             for (int i = 0; i < solution.size(); i++) {
 
-                writer.write( Integer.toString(solution.get(i)));
+                writer.write(Integer.toString(solution.get(i)));
 
-                if(i != solution.size() - 1){
+                if (i != solution.size() - 1) {
 
-                    //writer.write(System.getProperty( "line.separator" ));
                     writer.newLine();
                 }
             }

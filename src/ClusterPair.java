@@ -28,7 +28,7 @@ public class ClusterPair {
 
     public void setPair(Cluster first, Cluster second){
 
-        if(first.getClusterId() < second.getClusterId()){
+        if(first.getClusterId() <= second.getClusterId()){
 
             this.first = first;
             this.second = second;

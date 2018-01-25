@@ -3,13 +3,13 @@
  */
 public class Point {
 
-    private int x;
-    private int y;
+    private double x;
+    private double y;
     private Cluster owningCluster;
     private static int idCounter = 0;
     private int id = 0;
 
-    public Point(int x, int y){
+    public Point(double x, double y){
 
         idCounter++;
         this.id = idCounter;
@@ -21,11 +21,11 @@ public class Point {
         return id;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 

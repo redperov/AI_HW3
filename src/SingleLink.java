@@ -1,5 +1,3 @@
-import javafx.util.Pair;
-
 import java.util.ArrayList;
 
 /**
@@ -12,11 +10,18 @@ public class SingleLink implements DistanceFunction {
 
         ArrayList<Point> points1 = cluster1.getPoints();
         ArrayList<Point> points2 = cluster2.getPoints();
+        Point point1;
+        Point point2;
         double shortestDistance = Double.MAX_VALUE;
         double currentDistance;
 
-        for(Point point1 : points1){
-            for(Point point2 : points2){
+        for (int i = 0; i < points1.size(); i++) {
+
+            point1 = points1.get(i);
+
+            for (int j = 0 ; j < points2.size(); j++) {
+
+                point2 = points2.get(j);
 
                 //Calculate distance between two points.
                 currentDistance = Math.sqrt(Math.pow((point2.getX() - point1.getX()), 2)

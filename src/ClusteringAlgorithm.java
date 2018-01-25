@@ -1,10 +1,8 @@
-import javafx.util.Pair;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
- * Created by Danny on 22/01/2018.
+ * The class contains the logic of the clustering algorithm.
+ * Contains static methods which are used throughout the algorithm.
  */
 public class ClusteringAlgorithm {
 
@@ -15,6 +13,11 @@ public class ClusteringAlgorithm {
 
     }
 
+    /**
+     * Performs the requested clustering algorithm.
+     * @param searchable Searchable object
+     * @return list of representing to what cluster each point belongs
+     */
     public static ArrayList<Integer> execute(Searchable searchable) {
 
         int                neededClusters   = searchable.getNeededClusters();
@@ -22,16 +25,19 @@ public class ClusteringAlgorithm {
         ArrayList<Point>   points           = searchable.getPoints();
         ArrayList<Integer> result;
         DistanceFunction   distanceFunction = searchable.getDistanceFunction();
-        int                counter          = 1;
+        int                counter          = 0;
 
+        //Create a cluster for each point.
         for (Point point : points) {
 
+            counter++;
             Cluster newCluster = new Cluster(point, counter);
             clusters.add(newCluster);
-            counter++;
+
         }
 
-        while (counter - 1 > neededClusters) {
+        //Union clusters until the requested amount of clusters.
+        while (counter > neededClusters) {
 
             ClusterPair minimumPair = minimumDistance(clusters, distanceFunction);
 
@@ -39,15 +45,24 @@ public class ClusteringAlgorithm {
 
             combineClusters(minimumPair, clusters);
 
+            reorderIds(clusters);
+
             counter--;
         }
 
+        //Transform the clusters into a list of ids.
         result = clustersToInts(clusters, points);
 
         return result;
 
     }
 
+    /**
+     * Find the two clusters with the shortest distance according to the stated distance function.
+     * @param clusters clusters list
+     * @param distanceFunction distance function.
+     * @return cluster pair
+     */
     private static ClusterPair minimumDistance(ArrayList<Cluster> clusters, DistanceFunction distanceFunction) {
 
         ClusterPair clusterPair = new ClusterPair();
@@ -77,6 +92,11 @@ public class ClusteringAlgorithm {
         return clusterPair;
     }
 
+    /**
+     * Removes unnecessary clusters from the list.
+     * @param clusterToRemoveId cluster id to remove
+     * @param clusters clusters list
+     */
     private static void removeUnnecessaryCluster(int clusterToRemoveId, ArrayList<Cluster> clusters) {
 
         for (int i = 0; i < clusters.size(); i++) {
@@ -89,6 +109,11 @@ public class ClusteringAlgorithm {
         }
     }
 
+    /**
+     * Combine two clusters into one.
+     * @param pair clusters pair
+     * @param clusters clusters list
+     */
     private static void combineClusters(ClusterPair pair, ArrayList<Cluster> clusters) {
 
         int              id         = pair.getFirst().getClusterId();
@@ -107,6 +132,12 @@ public class ClusteringAlgorithm {
         }
     }
 
+    /**
+     * Transforms a clusters list into a list of their ids.
+     * @param clusters clusters list
+     * @param points points list
+     * @return ids list
+     */
     private static ArrayList<Integer> clustersToInts(ArrayList<Cluster> clusters, ArrayList<Point> points) {
 
         ArrayList<Integer> result = new ArrayList<>(points.size());
@@ -122,6 +153,12 @@ public class ClusteringAlgorithm {
         return result;
     }
 
+    /**
+     * Finds the cluster to which the given point belongs.
+     * @param point point
+     * @param clusters clusters list
+     * @return cluster id
+     */
     private static int pointToClusterId(Point point, ArrayList<Cluster> clusters) {
 
         ArrayList<Point> points;
@@ -140,5 +177,13 @@ public class ClusteringAlgorithm {
         }
 
         return -1;
+    }
+
+    private static void reorderIds(ArrayList<Cluster> clusters){
+
+        for(int i = 0; i < clusters.size(); i++){
+
+            clusters.get(i).setClusterId(i + 1);
+        }
     }
 }

@@ -1,5 +1,3 @@
-import javafx.util.Pair;
-
 /**
  * Created by Danny on 23/01/2018.
  */
